@@ -1,0 +1,127 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 4rem;
+}
+.register{
+    display: flex;
+    gap: 1rem;
+}
+.btn{
+    border: 1px solid;
+    padding: .5rem .8rem;
+    outline: none;
+    border-radius: .5rem;
+    background-color: transparent;
+    font-weight: 600;
+    cursor: pointer;
+}
+.logout{
+    background-color: red;
+    color: white;
+}
+.logout:hover{
+    background-color: transparent;
+    color: red;
+}
+.login{
+    background-color: teal;
+    color: white;
+}
+.login:hover{
+    background-color: transparent;
+    color: teal;
+}
+.signup{
+    background-color: black;
+    color: white;
+}
+.signup:hover{
+    background-color: transparent;
+    color: black;
+}
+.reg-form{
+    width: 19rem;
+    padding: 2rem 1rem 1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 1px solid;
+    border-radius: .6rem;
+}
+h4{
+    margin-block: .8rem;
+    text-align: center;
+    color: gray;
+}
+label,input{
+    display: block;
+    margin-block: .2rem;
+}
+label{
+    font-size: .7rem;
+    font-weight: 700;
+}
+input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid brown;
+    width: 15rem;
+    padding: .2rem .5rem;
+    background-color: transparent;
+}
+.reg-sign{
+    margin: 1rem 0;
+}
+.reg-form select{
+    width: 5rem;
+    padding: .2rem 0;
+    border-radius: .2rem;
+}
+.reg-form p{
+    text-align: center;
+    color: white;
+    font-size: .7rem;
+    background-color: red;
+    padding-block: .4rem;
+    border-radius: .3rem;
+}
+.use{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:427px) {
+    .nav{
+        margin: 1rem 0;
+    }
+   .btn{
+    padding: .4rem .6rem;
+    font-size: .9rem;
+   }
+   .nav .form select,
+   .nav .form select option{
+    width: 8rem;
+    padding: .4rem;
+   }
+   .reg-form{
+    width: 18rem;
+    padding: 1.4rem .8rem .8rem;
+   }
+   .use{
+    gap: .3rem;
+   }
+}

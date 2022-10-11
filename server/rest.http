@@ -1,0 +1,23 @@
+POST  http://localhost:9000/api/register
+Content-Type: application/json
+
+{
+    "username":"abiona12",
+    "email":"abiona@mail",
+    "password":"myday123",
+    "student":1,
+    "universityName":"unilag"
+}
+
+###
+POST  http://localhost:9000/api/login
+Content-Type: application/json
+
+{
+    "username":"abiona1",
+    "password":"myday123"
+}
+
+
+###
+GET  http://localhost:9000/api/university
