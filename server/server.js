@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const userRoutes= require('./Routes/userRouter')
 const universityRoute = require('./Routes/universitiesListRouter')
+const lugunRoute = require('./Routes/lugunRoutes')
 
 
 app.use(express.json())
@@ -15,5 +16,8 @@ app.use('/api', userRoutes)
 
 // middleware for the universities in Nigeria
 app.use('/api', universityRoute)
+
+// middleware for locations in the university
+app.use('/api', lugunRoute)
 
 app.listen(9000, ()=> console.log("server is working!!!...."))

@@ -93,12 +93,61 @@ input{
     align-items: center;
     gap: 1rem;
 }
-
-
-
-
-
-
+.nav .form select{
+    width: 15rem;
+    padding: .4rem;
+    border-radius: .3rem;
+}
+.card{
+    max-width: 15rem;
+    padding: 1rem .7rem;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    border-radius: 2rem;
+}
+.card h6{
+    font-size: .8rem;
+    border-bottom: 1px dashed brown;
+    width: max-content;
+}
+.card p{
+    font-size: .8rem;
+}
+.card-form{
+    max-width: 22rem;
+    padding: .7rem .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+.card-form input{
+    border-bottom: 1px solid gray;
+    width: max-content;
+}
+.card-form textarea{
+    outline: none;
+    border: 1px solid gray;
+    border-radius: .2rem;
+    height: 3rem;
+    padding: .2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+.card-form label{
+    color: tomato;
+    font-size: .9rem;
+}
+.card-form select{
+    padding: .3rem;
+    border-radius: .3rem;
+}
+.card-form button{
+    width: max-content;
+    background-color: lightseagreen;
+    color: white;
+}
 
 
 

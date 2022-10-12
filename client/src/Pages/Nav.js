@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import useList from '../Hooks/useList'
 import { userContext } from '../Context/userContext'
+import axios from 'axios'
 
-export default function Nav({login, register}) {
+export default function Nav({login, register, screen}) {
 
-  const {getAllSchools, school} = useList()
 
+    const [school, setSchool] = useState([])
     const [user, setUser] = useContext(userContext)
-  const currentUser = !user ? "" : user.username
+    const currentUser = !user ? "" : user.username
   
 
-  // 
+  // location
   const [location, setLocation] = useState({
     university:""
   })
 
   useEffect(()=>{
+    async function getAllSchools(){
+      try {
+          const res = await axios.get('http://localhost:9000/api/university')
+          setSchool(res.data)
+      } catch (err) {
+          console.log(err)
+      }
+    }
     getAllSchools()
-  }, [location.university])
-
+  })
 
   function handleChange(e){
     const {name, value}= e.target
@@ -33,23 +40,25 @@ export default function Nav({login, register}) {
   }
 
   function check(){
-    school.map((el)=> {
-      if(el.name === location.university)
-      console.log({
-        lat:el.latitude,
-        long: el.longtitude
-      })
+    school.filter((el)=> {
+        if(el.name === location.university)
+        screen(prev => {
+          return{
+            lat:el.latitude,
+            long:el.longtitude,
+            name:el.name
+          }
+        }) 
     })
   }
-
-  check()
 
   return (
     <div className='nav'>
       <div className="form">
         <select name="university" id="university" 
         value={location.university} 
-        onChange={handleChange}>
+        onChange={handleChange}
+        onClick={check}>
 
           <option value="null">Pick your university here</option>
           {!school ? "loading" :
