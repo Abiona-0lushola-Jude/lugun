@@ -52,6 +52,11 @@ export default function Nav({login, register, screen}) {
     })
   }
 
+  function logout(){
+    setUser(null)
+    localStorage.clear()
+  }
+
   return (
     <div className='nav'>
       <div className="form">
@@ -73,8 +78,8 @@ export default function Nav({login, register, screen}) {
       <div className="register">
         {currentUser ?
         <div className='use'>
-        <h5>Welcome, {user.email}</h5>
-        <button className="btn logout" onClick={()=> setUser(null)}>Log Out</button>
+        <h5>Welcome, {user.username}</h5>
+        <button className="btn logout" onClick={logout}>Log Out</button>
         </div>
          :
         <>

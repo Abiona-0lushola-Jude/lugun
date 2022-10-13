@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import useUser from '../Hooks/useUser'
 
-export default function Login() {
+export default function Login({close}) {
 
-    const {loginUser, error} = useUser()
+    const {loginUser, error, user} = useUser()
 
     const [studentLoginForm, setStudentLoginForm] = useState({
         username:"",
@@ -25,6 +25,9 @@ export default function Login() {
     const handleSubmit = (e) =>{
         e.preventDefault()
         loginUser(studentLoginForm)
+        if(localStorage.getItem('userLugun') !== null){
+          close()
+        }
     }
 
 

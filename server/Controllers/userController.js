@@ -65,7 +65,8 @@ module.exports = {
             }else{
                 res.status(200).json({
                     username: data[0].username,
-                    email: data[0].email
+                    email: data[0].email,
+                    school: data[0].universityName
                 })
             }
         })

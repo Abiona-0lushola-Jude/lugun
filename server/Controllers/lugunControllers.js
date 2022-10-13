@@ -3,14 +3,15 @@ const DB = require('../Dbconnection/mysqlConnection')
 
 module.exports = {
     postLugun : async (req, res) => {
-        const q = "INSERT INTO university_lugun.luguns (`title`, `review`, `rating`, `lat`, `long`, `user`) VALUES (?)"
+        const q = "INSERT INTO university_lugun.luguns (`title`, `review`, `rating`, `lat`, `long`, `user`, `school`) VALUES (?)"
         const values= [
             req.body.title,
             req.body.review,
             req.body.rating,
             req.body.lat,
             req.body.long,
-            req.body.user
+            req.body.userId,
+            req.body.userSch
         ]
 
         await DB.query(q, [values], (err, data)=>{

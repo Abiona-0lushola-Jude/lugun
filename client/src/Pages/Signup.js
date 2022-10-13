@@ -3,7 +3,7 @@ import useUser from '../Hooks/useUser'
 
 export default function Signup({close}) {
 
-        const {registerUser, error} = useUser()
+        const {registerUser, error, user} = useUser()
 
     const [studentForm, setStudentForm] = useState({
         username:"",

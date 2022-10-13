@@ -12,7 +12,7 @@ export default function useUser() {
     async  function registerUser(value){
         try {
             const res = await axios.post('http://localhost:9000/api/register', value)
-            await setUser(null)
+            await setUser(res.data)
             await setError(null)
         } catch (err) {
             await setError(err.response.data.message)
@@ -25,6 +25,8 @@ export default function useUser() {
         try {
             const res = await axios.post('http://localhost:9000/api/login', value)
             await setUser(res.data)
+            await localStorage.setItem('userLugun', res.data.username)
+            await localStorage.setItem('userLugunSch', res.data.school)
             await setError(null)
         } catch (err) {
             await setError(err.response.data.message)
