@@ -31,5 +31,17 @@ module.exports = {
 
             return res.status(200).json(data)
         })
+    },
+
+    deleteLugun : async(req, res)=>{
+        const id = req.params.id
+        const q = "DELETE FROM university_lugun.luguns WHERE id=?"
+
+        DB.query(q, [id], (err, data)=>{
+            if(err) res.status(500).json({message: err.message})
+
+
+            return res.status(200).json("Data is deleted")
+        })
     }
 }

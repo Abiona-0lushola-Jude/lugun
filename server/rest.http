@@ -26,3 +26,8 @@ GET  http://localhost:9000/api/university
 
 ###
 GET  http://localhost:9000/api/get/lungun
+
+
+
+###
+DELETE   http://localhost:9000/api/delete/lungun/12

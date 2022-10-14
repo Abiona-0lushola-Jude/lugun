@@ -106,12 +106,23 @@ input{
     display: flex;
     flex-direction: column;
     gap: .2rem;
-    border-radius: 2rem;
+    border-radius: .2rem;
+    z-index: 8;
+    border: 1px solid teal;
+    position: absolute;
+    left: 100vw;
+    margin: 1rem;
+    background-color: white;
+}
+.show{
+    left: 0;
+    transition: all ease-in 200s;
 }
 .card h6{
     font-size: .8rem;
     border-bottom: 1px dashed brown;
     width: max-content;
+    color: darkslategrey;
 }
 .card p{
     font-size: .9rem;
@@ -154,7 +165,19 @@ input{
     display: flex;
     gap: .2rem;
 }
-
+.out{
+    display: flex;
+    justify-content: end;
+}
+.bttn{
+    padding: .3rem .7rem;
+    font-size: .6rem;
+    background-color: red;
+    outline: none;
+    border-radius: .9rem;
+    color: white;
+    border: none;
+}
 
 
 
@@ -177,5 +200,17 @@ input{
    }
    .use{
     gap: .3rem;
+   }
+   .card{
+    max-width: 10rem;
+   }
+   .card h6{
+    font-size: .77rem;
+   }
+   .card p{
+    font-size: .7rem;
+   }
+   .home{
+    padding-inline: .3rem;
    }
 }

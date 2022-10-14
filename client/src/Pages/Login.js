@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import useUser from '../Hooks/useUser'
+import { useContext } from 'react'
+import { userContext } from '../Context/userContext'
 
 export default function Login({close}) {
 
-    const {loginUser, error, user} = useUser()
-
+    const [ user] = useContext(userContext)
+    const {loginUser, error} = useUser()
+    const userId = !user ? "loading"  :user
     const [studentLoginForm, setStudentLoginForm] = useState({
         username:"",
         password:"",
@@ -25,9 +28,7 @@ export default function Login({close}) {
     const handleSubmit = (e) =>{
         e.preventDefault()
         loginUser(studentLoginForm)
-        if(localStorage.getItem('userLugun') !== null){
-          close()
-        }
+        userId.username !== null && close() 
     }
 
 

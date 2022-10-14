@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { userContext } from '../Context/userContext'
 import axios from 'axios'
 
-export default function Nav({login, register, screen}) {
+export default function Nav({login, register, screen, close}) {
 
 
     const [school, setSchool] = useState([])
@@ -48,7 +48,8 @@ export default function Nav({login, register, screen}) {
             long:el.longtitude,
             name:el.name
           }
-        }) 
+        })
+        close() 
     })
   }
 

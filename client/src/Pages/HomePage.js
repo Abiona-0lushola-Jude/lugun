@@ -41,6 +41,7 @@ export default function HomePage() {
 
 
   const [showForm, setShowForm] = useState(false)
+  const [showTag, setShowTag] = useState(false)
 
 
   // form for the new locations
@@ -87,7 +88,7 @@ export default function HomePage() {
   return (
     <div className='home'>
       <h1>Universities luguns</h1>
-      <Nav login={toggleLogin} register={toggleRegister}  screen={setScreen}/>
+      <Nav login={toggleLogin} register={toggleRegister}  screen={setScreen} close={()=> setShowTag(true)}/>
       {openRegister && <Signup close={toggleRegister}/>}
       {openLogin && <Login close={toggleLogin} />}
       <MapProvider>
@@ -97,21 +98,23 @@ export default function HomePage() {
               latitude: 9,
               zoom: 5
             }}
-            style={{width: "97vw", height: "80vh"}}
+            style={{width: "96vw", height: "96vh"}}
             mapStyle="mapbox://styles/abionaolushola/cl97jbqym004717lae5rwb4rf"
             mapboxAccessToken={process.env.REACT_APP_MAPTOKEN}
             onDblClick={handleDoubleClick}
             dragRotate={false}
           >
             {/* pop for schools in nigeria */}
-            <Popup longitude={screen.long} latitude={screen.lat}
-              anchor="bottom">
+            {showTag && <Popup longitude={screen.long} latitude={screen.lat}
+              anchor="bottom"
+              onClose={()=> setShowTag(prev => !prev)}
+              >
               <h5>{screen.name}</h5>
-            </Popup>
+            </Popup>}
 
           <Location />
 
-          {user.username && <>{showForm && <Form close={onClose} lugun={lugun} handleChange={handleChange}/> }</>}
+          {userId.username && <>{showForm && <Form close={onClose} lugun={lugun} handleChange={handleChange}/> }</>}
             
           </Map>
       </MapProvider>
