@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react'
 import { userContext } from '../Context/userContext'
+import UniversityApi from '../Hooks/UniversityApi.json'
 import axios from 'axios'
+import { signOut } from 'firebase/auth'
+import { auth } from '../Auth/UserAuthentication'
 
 export default function Nav({login, register, screen, close}) {
 
 
-    const [school, setSchool] = useState([])
-    const [user, setUser] = useContext(userContext)
-    const currentUser = !user ? "" : user.username
+    
+    const {user} = useContext(userContext)
+    const currentUser = !user ? "" : user.email
   
 
   // location
@@ -16,17 +19,8 @@ export default function Nav({login, register, screen, close}) {
     university:""
   })
 
-  useEffect(()=>{
-    async function getAllSchools(){
-      try {
-          const res = await axios.get('http://localhost:9000/api/university')
-          setSchool(res.data)
-      } catch (err) {
-          console.log(err)
-      }
-    }
-    getAllSchools()
-  })
+
+
 
   function handleChange(e){
     const {name, value}= e.target
@@ -40,7 +34,7 @@ export default function Nav({login, register, screen, close}) {
   }
 
   function check(){
-    school.filter((el)=> {
+    UniversityApi.filter((el)=> {
         if(el.name === location.university)
         screen(prev => {
           return{
@@ -54,8 +48,7 @@ export default function Nav({login, register, screen, close}) {
   }
 
   function logout(){
-    setUser(null)
-    localStorage.clear()
+   signOut(auth)
   }
 
   return (
@@ -67,8 +60,7 @@ export default function Nav({login, register, screen, close}) {
         onClick={check}>
 
           <option value="null">Pick your university here</option>
-          {!school ? "loading" :
-            school.map((element)=>{
+          {UniversityApi.map((element)=>{
               return(
                 <option key={element.id}  value={element.name}>{element.acrimony}</option>
               )
@@ -79,7 +71,7 @@ export default function Nav({login, register, screen, close}) {
       <div className="register">
         {currentUser ?
         <div className='use'>
-        <h5>Welcome, {user.username}</h5>
+        <h5>{user.email}</h5>
         <button className="btn logout" onClick={logout}>Log Out</button>
         </div>
          :

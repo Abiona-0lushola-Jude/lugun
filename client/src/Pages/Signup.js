@@ -6,7 +6,6 @@ export default function Signup({close}) {
         const {registerUser, error, user} = useUser()
 
     const [studentForm, setStudentForm] = useState({
-        username:"",
         email:"",
         password:"",
         student:"",
@@ -25,12 +24,8 @@ export default function Signup({close}) {
 
 
     const handleSubmit = (e) =>{
-
         e.preventDefault()
-        registerUser(studentForm)
-        if(error === null){
-            return
-        }
+        registerUser(studentForm.email, studentForm.password)
         close()
     }
 
@@ -38,20 +33,18 @@ export default function Signup({close}) {
     <div className='reg-form'>
       <form onSubmit={handleSubmit}>
         <h4>Create an account</h4>
-        <label htmlFor="username">Enter Username: </label>
-        <input type="text" name="username" id="username"
-        value={studentForm.username}
-        onChange={handleChange}
-        />
         <label htmlFor="email">Email: </label>
         <input type="email" name="email" id="email" 
         value={studentForm.email}
         onChange={handleChange}
+        required
         />
         <label htmlFor="password">Password: </label>
         <input type="password" name="password" id="password" 
         value={studentForm.password}
-        onChange={handleChange}/>
+        onChange={handleChange}
+        required
+        />
         <label htmlFor="student">Are you currently a student? </label>
         <select name="student" id="student" 
         value={studentForm.student}

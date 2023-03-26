@@ -18,29 +18,29 @@ export default function useLugun() {
                 setError(err)
             }
         }
+        
         getAllLocation()
     }, [])
     
 
     async function postLocation(value){
         try {
-            console.log(value)
-            const res = await axios.post("http://localhost:9000/api/post/lugun", value) 
-            setLugun(prev=>{
+            await axios.post("http://localhost:9000/api/post/lugun", value) 
+            await setLugun(prev=>{
                 return[
                     ...prev,
                     {
-                        id:value.id,
+                        userId:value.userId,
                         lat:value.lat,
                         long:value.long,
                         rating:Number(value.rating),
                         review:value.review,
-                        school:value.userSch,
-                        title:value.title,
-                        user:value.userId,
+                        userEmail:value.userEmail,
+                        title:value.title
                     }
                 ]
             })
+
             setError(null)
         } catch (err) {
             setError(err)
@@ -51,7 +51,7 @@ export default function useLugun() {
     async function deleteLocation(id){
         try {
             await axios.delete(`http://localhost:9000/api/delete/lungun/${id}`)
-            setLugun(lugun.filter((el)=> el.id !== id))
+            setLugun(lugun.filter((el)=> el._id !== id))
             setError(null)
         } catch (err) {
             setLugun(lugun)

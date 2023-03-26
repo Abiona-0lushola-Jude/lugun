@@ -3,7 +3,6 @@ const router = express.Router()
 const lugunController = require('../Controllers/lugunControllers')
 
 
-
 // posting locations
 router.post('/post/lugun', lugunController.postLugun)
 

@@ -5,11 +5,10 @@ import { userContext } from '../Context/userContext'
 
 export default function Login({close}) {
 
-    const [ user] = useContext(userContext)
-    const {loginUser, error} = useUser()
-    const userId = !user ? "loading"  :user
+    const {user} = useContext(userContext)
+    const {loginUser,error} = useUser()
     const [studentLoginForm, setStudentLoginForm] = useState({
-        username:"",
+        email:"",
         password:"",
 
     })
@@ -28,7 +27,7 @@ export default function Login({close}) {
     const handleSubmit = (e) =>{
         e.preventDefault()
         loginUser(studentLoginForm)
-        userId.username !== null && close() 
+        close()
     }
 
 
@@ -37,8 +36,8 @@ export default function Login({close}) {
       <form onSubmit={handleSubmit}>
         <h4>Login your account</h4>
         <label htmlFor="username">Username: </label>
-        <input type="text" name="username" id="username"
-        value={studentLoginForm.username}
+        <input type="text" name="email" id="email"
+        value={studentLoginForm.email}
         onChange={handleChange}
         />
         <label htmlFor="password">Password: </label>

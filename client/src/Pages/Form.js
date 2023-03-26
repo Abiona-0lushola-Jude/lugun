@@ -1,24 +1,25 @@
 import React, { useContext } from 'react'
 import {Popup} from "react-map-gl";
+import { userContext } from '../Context/userContext';
 import useLugun from '../Hooks/useLugun';
 
-export default function Form({close, lugun, handleChange}) {
+export default function Form({close, lugun, handleChange, clear}) {
 
     // hook
     const {postLocation} = useLugun()
-    
+    const {user} = useContext(userContext)
 
     const post = {
       ...lugun,
-      userId: localStorage.getItem('userLugun'),
-      userSch: localStorage.getItem('userLugunSch')
+      userId: user.id,
+      userEmail:user.email
     }
    // function that submit form
    function handleSubmit(e){
     e.preventDefault()
-    // console.log(post)
     postLocation(post)
     close()
+    clear()
   }
   
 

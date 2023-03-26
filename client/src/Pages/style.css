@@ -4,6 +4,9 @@
     justify-content: space-between;
     margin: 1rem 4rem;
 }
+.home{
+    position: relative;
+}
 .register{
     display: flex;
     gap: 1rem;
@@ -47,8 +50,9 @@
     position: absolute;
     left: 0;
     right: 0;
+    top: 15rem;
     margin: auto;
-    border: 1px solid;
+    border: .1px solid teal;
     border-radius: .6rem;
     z-index: 10;
     background-color: white;
@@ -184,6 +188,7 @@ input{
 @media screen and (max-width:427px) {
     .nav{
         margin: 1rem 0;
+        padding-block: 2rem;
     }
    .btn{
     padding: .4rem .6rem;
@@ -212,5 +217,11 @@ input{
    }
    .home{
     padding-inline: .3rem;
-   }
+    }
+    .mapboxgl-canvas-container{
+        height: 40vh;
+    }
+    .map{
+        cursor: cell;
+    }
 }

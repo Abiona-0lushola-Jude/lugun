@@ -1,36 +1,32 @@
-import axios from "axios"
 import { useState } from "react"
 import { useContext } from "react"
 import { userContext } from "../Context/userContext"
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import { auth } from "../Auth/UserAuthentication"
 
 export default function useUser() {
 
-    const [user, setUser] = useContext(userContext)
+    const {user, getUser} = useContext(userContext)
     const [error, setError] = useState(null)
 
-
-    async  function registerUser(value){
+    async  function registerUser(email, password){
         try {
-            const res = await axios.post('http://localhost:9000/api/register', value)
-            await setUser(res.data)
-            await setError(null)
+            const res = await createUserWithEmailAndPassword(auth, email, password)
+            await getUser(res.user.uid, res.user.email)
+            setError(null)
         } catch (err) {
-            await setError(err.response.data.message)
-            await setUser(null)
+            console.log(err)
         }
     }
 
 
     async function loginUser (value){
         try {
-            const res = await axios.post('http://localhost:9000/api/login', value)
-            await setUser(res.data)
-            await localStorage.setItem('userLugun', res.data.username)
-            await localStorage.setItem('userLugunSch', res.data.school)
-            await setError(null)
+            const res = await signInWithEmailAndPassword(auth, value.email, value.password)
+            await getUser(res.user.uid, res.user.email)
+            setError(null)
         } catch (err) {
-            await setError(err.response.data.message)
-            await setUser(null)
+            setError(err.message)
         }
     }
 

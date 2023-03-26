@@ -5,12 +5,21 @@ export const userContext = createContext()
 export default function UserContextProvider({children}) {
 
     const [user, setUser] = useState({
-      username: localStorage.getItem("userLugun") || null,
-      school: localStorage.getItem("userLugunSch") || null,
+      id:"",
+      email:""
     })
 
+    async function getUser(id, email){
+      await setUser(prev=>{
+        return{
+          id,
+          email
+        }
+      })
+    }
+
   return (
-    <userContext.Provider value={[user, setUser]}>
+    <userContext.Provider value={{user, getUser}}>
         {children}
     </userContext.Provider>
   )

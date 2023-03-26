@@ -1,47 +1,34 @@
-const DB = require('../Dbconnection/mysqlConnection')
-
+const lugunModel = require('../Models/LugunModel')
 
 module.exports = {
     postLugun : async (req, res) => {
-        const q = "INSERT INTO university_lugun.luguns (`title`, `review`, `rating`, `lat`, `long`, `user`, `school`) VALUES (?)"
-        const values= [
-            req.body.title,
-            req.body.review,
-            req.body.rating,
-            req.body.lat,
-            req.body.long,
-            req.body.userId,
-            req.body.userSch
-        ]
-
-        await DB.query(q, [values], (err, data)=>{
-            if(err) return res.status(400).json({messgae: err.message})
-
-
-            return res.status(203).json("Location created!")
-        })
+        
+        const {title, review, rating, lat, long, userId, userSch, userEmail} = req.body
+        try {
+            const createLugun = await lugunModel.create({title, review, rating, lat, long, userId, userSch, userEmail})
+            await res.status(201).json(createLugun)
+        } catch (err) {
+            res.status(400).json({message: err.message})
+        }
     },
     
     getAllLugun : async (req, res) =>{
-        const q = "SELECT * FROM university_lugun.luguns"
-
-        await DB.query(q, (err, data)=>{
-            if(err) return res.status(400).json({messgae: err.message})
-
-
-            return res.status(200).json(data)
-        })
+        try {
+            const allLuguns = await lugunModel.find()
+            await res.status(200).json(allLuguns)
+        } catch (err) {
+            res.status(500).json({message: err.message})
+        }
     },
 
     deleteLugun : async(req, res)=>{
-        const id = req.params.id
-        const q = "DELETE FROM university_lugun.luguns WHERE id=?"
-
-        DB.query(q, [id], (err, data)=>{
-            if(err) res.status(500).json({message: err.message})
-
-
-            return res.status(200).json("Data is deleted")
-        })
+        const {id} = req.params
+        
+        try {
+            await lugunModel.findByIdAndDelete(id)
+            await res.status(202).json({message: "Lugun Location has been deleted"})
+        } catch (err) {
+            res.status(404).json({message: err.message})
+        }
     }
 }

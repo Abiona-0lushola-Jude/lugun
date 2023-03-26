@@ -11,7 +11,7 @@ const Location = () => {
 
     const [featuresId, showFeaturesId] = useState(null)
     const [show, setShow] = useState(false)
-    const[user]= useContext(userContext)
+    const{user}= useContext(userContext)
     const userId = !user ? "loading"  :user
     const [lugun] = useContext(lugunContext)
     const{deleteLocation} = useLugun()
@@ -29,6 +29,8 @@ const Location = () => {
         setShow(prev => !prev)
     }
 
+    const random = Math.random()
+
   return (
     <div style={{postion:"relative"}}>
         {
@@ -39,25 +41,25 @@ const Location = () => {
                         anchor="bottom" 
                         onClick={()=> handleClick(element)}
                         >
-                            <ImLocation style={{fontSize: "30",color:userId.username === element.user? "tomato" : "slateblue"}}  cursor={"pointer"}/>
+                            <ImLocation style={{fontSize: "30", color:userId.id === element.userId ? "tomato" : "slateblue"}}  cursor={"pointer"}/>
                         </Marker>
                     </div>
                 )
             })
         }
         {show &&
-            <div className={featuresId ? "card show" : "card" }>
+            <div className={featuresId ? "card show" : "card" } key={featuresId._id}>
                 <h6 className="title">Title</h6>
                 <p className="title-context">{featuresId.title}</p>
                 <h6 className="desc">Review</h6>
                 <p className="review-content">{featuresId.review}</p>
                 <h6 className="rating">Rating</h6>
                 <div className="rating-card">
-                    {Array(featuresId.rating).fill(<BsFillStarFill style={{color:"gold"}}/>)}
+                    {Array(Number(featuresId.rating)).fill(<BsFillStarFill style={{color:"gold"}} key={featuresId.lat}/>)}
                 </div>
-                <p className="posted">Created by <strong>{featuresId.user}</strong> from <strong>{featuresId.school}</strong></p>
+                <p className="posted">Created by <strong>{featuresId.userEmail}</strong> from <strong>{featuresId.school}</strong></p>
                 {userId.username === featuresId.user && <div className="out">
-                    <button className='bttn reg-sign' onClick={()=> handleDelete(featuresId.id)}>Delete</button>
+                    <button className='bttn reg-sign' onClick={()=> handleDelete(featuresId._id)}>Delete</button>
                 </div>}
             </div>
         }
