@@ -120,14 +120,16 @@ export default function HomePage() {
             style={{width: "96vw", height: "90vh"}}
             mapStyle="mapbox://styles/abionaolushola/cl97jbqym004717lae5rwb4rf"
             mapboxAccessToken={process.env.REACT_APP_MAPTOKEN}
-            onDblClick ={handleDoubleClick}
+            onClick ={handleDoubleClick}
             dragRotate={false}
+            cursor="auto"
           >
 
             {/* pop for schools in nigeria */}
             {showTag && <Popup longitude={screen.long} latitude={screen.lat}
               anchor="bottom"
               onClose={()=> setShowTag(prev => !prev)}
+              closeOnClick= {true}
               >
               <h5>{screen.name}</h5>
             </Popup>}

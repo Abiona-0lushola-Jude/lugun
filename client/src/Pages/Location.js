@@ -57,8 +57,8 @@ const Location = () => {
                 <div className="rating-card">
                     {Array(Number(featuresId.rating)).fill(<BsFillStarFill style={{color:"gold"}} key={featuresId.lat}/>)}
                 </div>
-                <p className="posted">Created by <strong>{featuresId.userEmail}</strong> from <strong>{featuresId.school}</strong></p>
-                {userId.username === featuresId.user && <div className="out">
+                <p className="posted">Created by <strong>{featuresId.userEmail}</strong></p>
+                {userId.id=== featuresId.userId && <div className="out">
                     <button className='bttn reg-sign' onClick={()=> handleDelete(featuresId._id)}>Delete</button>
                 </div>}
             </div>
